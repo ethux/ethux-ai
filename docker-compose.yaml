@@ -1,0 +1,64 @@
+services:
+  ethux-ai-api:
+    build:
+      context: .
+      dockerfile: api.Dockerfile
+    ports:
+      - "8008:8000"
+    env_file:
+      - .env
+    depends_on:
+      - executor-1
+      - executor-2
+      - executor-3
+    networks:
+      - executor-network
+
+  # Executor containers
+  executor-1:
+    build:
+      context: .
+      dockerfile: executor.Dockerfile
+    environment:
+      - EXECUTOR_ID=1
+    env_file:
+      - executor/.env
+    volumes:
+      - executor-1-data:/app/data
+    networks:
+      - executor-network
+
+  executor-2:
+    build:
+      context: .
+      dockerfile: executor.Dockerfile
+    environment:
+      - EXECUTOR_ID=2
+    env_file:
+      - executor/.env
+    volumes:
+      - executor-2-data:/app/data
+    networks:
+      - executor-network
+
+  executor-3:
+    build:
+      context: .
+      dockerfile: executor.Dockerfile
+    environment:
+      - EXECUTOR_ID=3
+    env_file:
+      - executor/.env
+    volumes:
+      - executor-3-data:/app/data
+    networks:
+      - executor-network
+
+networks:
+  executor-network:
+
+volumes:
+  execution_log:
+  executor-1-data:
+  executor-2-data:
+  executor-3-data:

@@ -1,0 +1,237 @@
+[
+    {
+        "name": "pandas",
+        "description": "Data analysis and manipulation library",
+        "functions": [
+            {
+                "name": "read_csv",
+                "description": "Read a comma-separated values (csv) file into DataFrame",
+                "usage": "df = pd.read_csv('filename.csv')"
+            },
+            {
+                "name": "DataFrame",
+                "description": "Two-dimensional, size-mutable, potentially heterogeneous tabular data",
+                "usage": "df = pd.DataFrame({'col1': [1, 2], 'col2': [3, 4]})"
+            }
+        ]
+    },
+    {
+        "name": "numpy",
+        "description": "Numerical computing library",
+        "functions": [
+            {
+                "name": "array",
+                "description": "Create an array",
+                "usage": "arr = np.array([1, 2, 3])"
+            },
+            {
+                "name": "random.rand",
+                "description": "Random values in a given shape",
+                "usage": "x = np.random.rand(5)"
+            }
+        ]
+    },
+    {
+        "name": "matplotlib.pyplot",
+        "description": "Plotting library",
+        "functions": [
+            {
+                "name": "plot",
+                "description": "Plot y versus x as lines and/or markers",
+                "usage": "plt.plot(x, y)"
+            },
+            {
+                "name": "savefig",
+                "description": "Save the current figure",
+                "usage": "plt.savefig('filename.png')"
+            }
+        ]
+    },
+    {
+        "name": "requests",
+        "description": "HTTP library",
+        "functions": [
+            {
+                "name": "get",
+                "description": "Sends a GET request",
+                "usage": "response = requests.get('https://api.example.com/data')"
+            },
+            {
+                "name": "post",
+                "description": "Sends a POST request",
+                "usage": "response = requests.post('https://api.example.com/data', json={'key': 'value'})"
+            }
+        ]
+    },
+    {
+        "name": "wikipedia",
+        "description": "Wikipedia API for Python",
+        "functions": [
+            {
+                "name": "summary",
+                "description": "Get a summary of a Wikipedia page",
+                "usage": "print(wikipedia.summary('Wikipedia'))"
+            },
+            {
+                "name": "search",
+                "description": "Search Wikipedia for a query",
+                "usage": "print(wikipedia.search('Barack'))"
+            },
+            {
+                "name": "page",
+                "description": "Get a Wikipedia page",
+                "usage": "ny = wikipedia.page('New York')"
+            },
+            {
+                "name": "set_lang",
+                "description": "Set the language of the Wikipedia API",
+                "usage": "wikipedia.set_lang('fr')"
+            }
+        ]
+    },
+    {
+        "name": "mistral_docs",
+        "description": "A package to scrape and search documentation from Mistral AI, handy to retrieve docs and information for Mistral AI related questions.",
+        "functions": [
+            {
+                "name": "scrape_docs",
+                "description": "Recursively scrape all raw files under the docs directory from the GitHub repository and save them locally.",
+                "usage": "scrape_docs()"
+            },
+            {
+                "name": "search_docs",
+                "description": "Search the stored documents using both normal search. Returns a list of found documents.",
+                "usage": "search_results = search_docs('your search term') \\n print(f\"Found Docs {search_results}\")"
+            }
+        ]
+    },
+    {
+        "name": "gitlab_interactor",
+        "description": "A package to interact with a self-hosted GitLab instance to list repositories, get repository details, view pipelines, and execute pipelines.",
+        "functions": [
+            {
+                "name": "GitLabClient",
+                "description": "A class to interact with a GitLab instance.",
+                "usage": "gitlab_client = GitLabClient()"
+            },
+            {
+                "name": "list_repos",
+                "description": "List all repositories accessible to the authenticated user.",
+                "usage": "repos = gitlab_client.list_repos(all_info=False)"
+            },
+            {
+                "name": "get_repo",
+                "description": "Get details of a specific repository.",
+                "usage": "repo_details = gitlab_client.get_repo(project_id)"
+            },
+            {
+                "name": "list_pipelines",
+                "description": "List all pipelines for a given project.",
+                "usage": "pipelines = gitlab_client.list_pipelines(project_id)"
+            },
+            {
+                "name": "trigger_pipeline",
+                "description": "Trigger a pipeline for a given project and branch.",
+                "usage": "triggered_pipeline = gitlab_client.trigger_pipeline(project_id, ref='main')"
+            },
+            {
+                "name": "get_pipeline",
+                "description": "Get details of a specific pipeline.",
+                "usage": "pipeline_details = gitlab_client.get_pipeline(project_id, pipeline_id)"
+            },
+            {
+                "name": "retry_pipeline",
+                "description": "Retry the failed builds for a pipeline.",
+                "usage": "retry_pipeline = gitlab_client.retry_pipeline(project_id, pipeline_id)"
+            },
+            {
+                "name": "cancel_pipeline",
+                "description": "Cancel builds in a pipeline.",
+                "usage": "cancel_pipeline = gitlab_client.cancel_pipeline(project_id, pipeline_id)"
+            },
+            {
+                "name": "delete_pipeline",
+                "description": "Delete a pipeline.",
+                "usage": "delete_pipeline = gitlab_client.delete_pipeline(project_id, pipeline_id)"
+            }
+        ]
+    },
+    {
+        "name": "github_scraper",
+        "description": "A package to scrape and search through GitHub repositories.",
+        "functions": [
+            {
+                "name": "GitHubScraper",
+                "description": "A class to interact with GitHub repositories for cloning and searching.",
+                "usage": "scraper = GitHubScraper(repo_url)"
+            },
+            {
+                "name": "clone_repo",
+                "description": "Clone the specified GitHub repository to a local directory.",
+                "usage": "scraper.clone_repo()"
+            },
+            {
+                "name": "search_code",
+                "description": "Search for a term within the cloned repository's code files. Returns a list of dictionaries containing the file path and content for each file where the search term is found.",
+                "usage": "results = scraper.search_code('search_term')",
+                "returns": "List of dictionaries with keys 'path' (file path) and 'content' (file content)"
+            },
+            {
+                "name": "search_raw",
+                "description": "Get the raw url for a file within the raw content of the repository's files.",
+                "usage": "result = scraper.search_raw('file')"
+            },
+            {
+                "name": "get_raw_file_content",
+                "description": "Fetches the raw content of a file from a given raw URL.",
+                "usage": "raw_file_content = scraper.get_raw_file_content('https://raw.githubusercontent.com/user/repo/main/file.txt')"
+            }
+        ]
+    },
+    {
+        "name": "code_generator",
+        "description": "A package designed for generating small pieces of code and modular code snippets using an LLM. It is optimized to produce incremental code components rather than full applications.",
+        "functions": [
+            {
+                "name": "CodeGenerator",
+                "description": "A class to generate small sections of code using a chat completions API. Ideal for producing code snippets and individual modules.",
+                "usage": "code_generator = CodeGenerator()"
+            },
+            {
+                "name": "generate_code",
+                "description": "Generate code for multiple files. It takes lists of target file names, goals describing the intended code for each file, and context details for precise generation. All input lists must be of the same length.",
+                "usage": "generated_codes = code_generator.generate_code(file_names, goals, contexts)"
+            },
+            {
+                "name": "extract_docstrings",
+                "description": "Extract docstrings from the provided code to improve code readability and documentation.",
+                "usage": "docstrings = extract_docstrings(code)"
+            },
+            {
+                "name": "ContextManager",
+                "description": "A class to manage contextual information during code generation, ensuring code snippets are generated with appropriate context.",
+                "usage": "context_manager = ContextManager()"
+            },
+            {
+                "name": "add_context",
+                "description": "Add context for a specific module to the ContextManager, enhancing targeted code generation.",
+                "usage": "context_manager.add_context(module_name, context)"
+            },
+            {
+                "name": "get_context",
+                "description": "Retrieve the context for a specific module to assist in generating accurate code snippets.",
+                "usage": "context = context_manager.get_context(module_name)"
+            },
+            {
+                "name": "get_all_contexts",
+                "description": "Get the context for all modules managed by the ContextManager, useful for comprehensive code integration.",
+                "usage": "all_contexts = context_manager.get_all_contexts()"
+            },
+            {
+                "name": "load_env_variables",
+                "description": "Load environment variables from a .env file to configure the code generation environment.",
+                "usage": "load_env_variables(env_path='.env')"
+            }
+        ]
+    }
+]
