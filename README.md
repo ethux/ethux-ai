@@ -33,7 +33,7 @@ cd ethux-ai
 
 2. Copy the example environment variables and fill in your API keys and other vars
 
-Note: Right now it works on with the Mistral API and models, for other API providers you have to change some of the code.
+Note: Right now it works only with the Mistral API and models, for other API providers you have to change some of the code.
   
    Use: `cp .example.env .env`.
 
