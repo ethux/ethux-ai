@@ -31,7 +31,9 @@ git clone https://github.com/ethux/ethux-ai.git
 cd ethux-ai
 ```
 
-2. Copy the example environment variables and fill in your API keys and other vars 
+2. Copy the example environment variables and fill in your API keys and other vars
+
+Note: Right now it works only with the Mistral API and models, for other API providers you have to change some of the code.
   
    Use: `cp .example.env .env`.
 
@@ -40,7 +42,7 @@ cd ethux-ai
    Depending on the modules you are using update the .env file with the required API keys and vars.
 
 
-3. Start the docker-compose stack:
+4. Start the docker-compose stack:
 ```
 sudo docker-compose up --build
 ```
