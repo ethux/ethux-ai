@@ -8,9 +8,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy application code
 COPY ./app /app
-COPY ./docs /app/docs
-
-RUN mkdir -p data
+COPY ./docs /app/app/docs
 
 EXPOSE 8000
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
