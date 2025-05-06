@@ -42,7 +42,7 @@ async def execute_code(code: str, timeout: int = 120) -> str:
                 logger.error("All attempts failed. Falling back to local execution.")
                 return await _execute_locally(code, execution_id, timeout)
             else:
-                await asyncio.sleep(2)  # Wait before retrying
+                await asyncio.sleep(1)  # Wait before retrying
 
 async def _execute_in_pool(code: str, execution_id: str, timeout: int) -> str:
     """Execute code in one of the executor containers from the pool."""
@@ -51,7 +51,7 @@ async def _execute_in_pool(code: str, execution_id: str, timeout: int) -> str:
         executor_id = random.randint(1, EXECUTOR_POOL_SIZE)
         executor_url = f"http://executor-{executor_id}:5000/execute"
 
-        logger.info(f"Executing code in executor-{executor_id} with ID {execution_id}")
+        logger.debug(f"Executing code in executor-{executor_id} with ID {execution_id}")
 
         # Send the code to the executor
         async with httpx.AsyncClient(timeout=timeout + 5) as client:
@@ -65,7 +65,7 @@ async def _execute_in_pool(code: str, execution_id: str, timeout: int) -> str:
             )
             result = response.json()
 
-            logging.info(f"Execution result: {result}")
+            logger.debug(f"Execution result: {result}")
             # Log the code execution result to the slitedb for debugging purposes
             await log_code_execution(code, result["stdout"], response.status_code, result["stderr"] )
 

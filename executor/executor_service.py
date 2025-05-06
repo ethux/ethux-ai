@@ -1,11 +1,11 @@
 import os
 import sys
 import subprocess
-import tempfile
 import traceback
 from fastapi import FastAPI
 from pydantic import BaseModel
 import uvicorn
+import autopep8
 
 app = FastAPI()
 
@@ -18,40 +18,34 @@ class CodeExecution(BaseModel):
 async def execute_code(execution: CodeExecution):
     """Execute Python code and return the result."""
     try:
-        # Create a temporary file for the code
-        with tempfile.NamedTemporaryFile(suffix='.py', delete=False, mode='w') as f:
-            f.write(execution.code)
-            code_file = f.name
-        
-        # Execute the code with timeout
-        result = subprocess.run(
-            [sys.executable, code_file],
-            capture_output=True,
-            text=True,
-            timeout=execution.timeout
+        # Format the code using autopep8
+        formatted_code = autopep8.fix_code(execution.code)
+
+        # Execute the formatted code with timeout using subprocess.Popen
+        process = subprocess.Popen(
+            [sys.executable, '-c', formatted_code],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True
         )
-        
-        # Clean up the temporary file
-        os.unlink(code_file)
-        
+
+        try:
+            stdout, stderr = process.communicate(timeout=execution.timeout)
+            returncode = process.returncode
+        except subprocess.TimeoutExpired:
+            process.kill()
+            stdout, stderr = process.communicate()
+            returncode = -1
+
         # Return the result
         return {
             "execution_id": execution.execution_id,
-            "stdout": result.stdout,
-            "stderr": result.stderr,
-            "returncode": result.returncode,
-            "success": result.returncode == 0
+            "stdout": stdout,
+            "stderr": stderr,
+            "returncode": returncode,
+            "success": returncode == 0
         }
-    
-    except subprocess.TimeoutExpired:
-        return {
-            "execution_id": execution.execution_id,
-            "stdout": "",
-            "stderr": f"Execution timed out after {execution.timeout} seconds",
-            "returncode": -1,
-            "success": False
-        }
-    
+
     except Exception as e:
         return {
             "execution_id": execution.execution_id,

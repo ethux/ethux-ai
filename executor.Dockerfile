@@ -16,7 +16,8 @@ RUN pip install --no-cache-dir \
     uvicorn \
     python-gitlab \
     python-dotenv \
-    paramiko
+    paramiko \
+    autopep8
 
 # Create directories for code execution
 RUN mkdir -p /app/data /app/code

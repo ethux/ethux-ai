@@ -156,26 +156,12 @@ async def stream_chat_completion(request: ChatCompletionRequest, request_id: str
     """
     Stream the chat completion response.
     """
+    start_time = time.time()  # Log the start time
     created = int(time.time())
     try:
         # Find relevant modules
         user_query = request.messages[-1].content
         relevant_modules = await find_relevant_modules(user_query)
-        # First yield message
-        thinking_message = "### Thinking... \n\n"
-        chunk = ChatCompletionChunk(
-            id=request_id,
-            created=created,
-            model=request.model,
-            choices=[
-                StreamChoice(
-                    index=0,
-                    delta=DeltaMessage(content=thinking_message),
-                    finish_reason=None
-                )
-            ]
-        )
-        yield f"data: {json.dumps(chunk.model_dump())}\n\n"
 
         # Generate code with retry mechanism
         max_retries = 2
@@ -262,3 +248,7 @@ async def stream_chat_completion(request: ChatCompletionRequest, request_id: str
         )
         yield f"data: {json.dumps(chunk.model_dump())}\n\n"
         yield "data: [DONE]\n\n"
+    finally:
+        end_time = time.time()  # Log the end time
+        total_time = end_time - start_time
+        logger.info(f"Total execution time for request {request_id}: {total_time:.2f} seconds")

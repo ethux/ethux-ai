@@ -23,7 +23,13 @@ class VectorStore:
         self.docs_dir = docs_dir
         self.documents = self.load_documents()
         self.vectorizer = TfidfVectorizer()
-        self.tfidf_matrix = self.vectorizer.fit_transform(self.documents)
+        try:
+            self.tfidf_matrix = self.vectorizer.fit_transform(self.documents)
+        except ValueError as e:
+            if "empty vocabulary" in str(e):
+                self.tfidf_matrix = None
+            else:
+                raise
 
     def load_documents(self):
         """
@@ -50,6 +56,9 @@ class VectorStore:
         Returns:
             list: A list of similar documents.
         """
+        if self.tfidf_matrix is None:
+            return []
+
         query_vec = self.vectorizer.transform([query])
         cosine_similarities = linear_kernel(query_vec, self.tfidf_matrix).flatten()
         related_docs_indices = cosine_similarities.argsort()[:-11:-1]

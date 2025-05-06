@@ -9,7 +9,7 @@ class Message(BaseModel):
     role: str
     content: str
 
-async def generate_code(messages: List[Message], relevant_modules: List[Dict[str, Any]], temperature: float = 0.15) -> str:
+async def generate_code(messages: List[Message], relevant_modules: List[Dict[str, Any]], temperature: float = 0.23) -> str:
     if not messages:
         return "# Error: No messages provided"
 
@@ -35,7 +35,6 @@ async def generate_code(messages: List[Message], relevant_modules: List[Dict[str
     • DO NOT generate random or nonsensical code for unclear requests.
     • Include inline comments to explain your approach, especially for non-traditional requests.
     • Use print statements for each step to communicate results to the orchestrator.
-    • Include appropriate error handling.
 
     Available Modules:
     {modules_info}
@@ -104,7 +103,7 @@ async def generate_code(messages: List[Message], relevant_modules: List[Dict[str
     code_messages = (
         [Message(role="system", content=system_message)] +
         few_shot_examples +
-        messages[-10:] # 10 most recent messages
+        messages[-5:] # 10 most recent messages
     )
 
     logger.info(f"Code gen messages: {code_messages}")
@@ -112,7 +111,7 @@ async def generate_code(messages: List[Message], relevant_modules: List[Dict[str
     try:
         response = await get_text_from_llm(
             messages=code_messages,
-            model="codestral-latest",
+            model="mistral-small-latest",
             temperature=temperature
         )
         
