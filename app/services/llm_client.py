@@ -8,7 +8,7 @@ import os
 logger = logging.getLogger(__name__)
 
 LLM_API_KEY = os.getenv("MISTRAL_API_KEY", "")
-LLM_API_URL = "https://api.mistral.ai/v1"
+LLM_API_URL = "https://openrouter.ai/api/v1"
 
 class Message(BaseModel):
     role: str

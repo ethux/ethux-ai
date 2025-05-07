@@ -1,13 +1,73 @@
-# ETHUX-AI  
-### Agentic Python Framework for LLM Integration  
+# ETHUX-AI
+
+**Agentic Python Framework for LLM Integration**
 
 [![License: AGPL-3.0](https://img.shields.io/badge/License-AGPL--3.0-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
 
 ## Introduction
 
-ETHUX-AI tries to transforms how Large Language Models (LLMs) interact by embedding them natively within a Python execution environment. Unlike other AI frameworks that rely on isolated tool calls, ETHUX-AI enables LLMs to operate as active agents, capable of dynamic workflow composition, stateful problem-solving, and true computational agency.
+ETHUX-AI aims to improve the way LLMs interact with tools and create workflows, by allowing them to write their actions and workflows in Python.
 
-While LLMs using Python as a native execution environment isn't new (as seen in code interpreters), ETHUX-AI's innovation lies in enabling LLMs to compose complex workflows using pre-defined functions tailored for LLMs and the broader Python ecosystem. This approach allows LLMs to create sophisticated solutions with error handling, state management, and multi-agent architectures.
+By encapsulating multiple functionalities within Python pip-packages or modules, ETHUX-AI enables LLMs to perform tasks using a more natural and expressive approach.
+
+In this README, we'll provide a more grounded and humble explanation of ETHUX-AI and its capabilities.
+
+## How It Works
+
+Each Python module in the `modules` directory encapsulates specific functionalities that LLMs can use to perform tasks. The system:
+
+1. Retrieves relevant modules based on conversation context
+2. Allows the LLM to select appropriate functions
+3. Enables the LLM to write and execute Python workflows
+
+Example workflow written by the LLM with comments:
+
+```python
+# Import the necessary modules
+from search import Google
+from vm_interactor import Hetzner
+from code_writer import agent
+
+def workflow():
+    try:
+        # Create a Google search object and perform a search
+        search = Google()
+        results = search.search("ETHUX-AI")
+        print(f"Search results: {results}")
+
+        # Initialize the code writer agent
+        agent = agent()
+
+        # Generate a list of commands to install ethux-ai based on the search results
+        list_of_installation_commands = agent.write_code(results)
+
+        # Create a Hetzner virtual machine object
+        vm = Hetzner()
+
+        # Create a new virtual machine using the provided name
+        creation = vm.create_vm("ethux-ai-vm")
+        print(f"Creation status: {creation}")
+
+        # Initialize an empty list to store results
+        list_of_results = []
+
+        # Execute each command on the virtual machine and store the results
+        for command in list_of_installation_commands:
+            result = vm.execute_command(command)
+            list_of_results.append(result)
+
+        # Return the search results
+        return results
+    except Exception as e:
+        print(f"Error: {e}")
+        return None
+```
+
+5. This workflow should be dry-runned and linted to ensure it is correct, and can be executed without any issues.
+6. Based on the execution result a retry is possible or inform the user the process has failed.
+
+As you can see, this enables the LLM to write its own process within code, instead of pre-defining functions and flows.
+See each module as n8n modules, but then in code, with the possebility for the LLM to wr
 
 ### ETHUX-AI enables LLMs to:
 

@@ -127,7 +127,7 @@ async def create_chat_completion(request: ChatCompletionRequest):
         # Get final response from the LLM API
         response_content = await get_text_from_llm(
             messages=new_messages,
-            model="mistral-large-latest",
+            model="mistralai/mistral-small-3.1-24b-instruct",
             temperature=request.temperature
         )
         # Format the response
@@ -215,7 +215,7 @@ async def stream_chat_completion(request: ChatCompletionRequest, request_id: str
         logging.info(f"Streaming final explanation from LLM API {new_messages}")
         async for chunk_text in stream_text_from_llm(
             messages=new_messages,
-            model="mistral-large-latest",
+            model="mistralai/mistral-small-3.1-24b-instruct",
             temperature=0.4
         ):
             chunk = ChatCompletionChunk(

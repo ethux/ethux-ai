@@ -233,5 +233,31 @@
                 "usage": "load_env_variables(env_path='.env')"
             }
         ]
+    },
+    {
+        "name": "vm_interactor",
+        "description": "A package to interact with a VM over SSH.",
+        "functions": [
+            {
+                "name": "SSHClient",
+                "description": "A class to interact with a VM over SSH.",
+                "usage": "ssh_client = SSHClient(hostname, username, password=None, port=22, key_file=None)"
+            },
+            {
+                "name": "connect",
+                "description": "Establish an SSH connection to the VM.",
+                "usage": "ssh_client.connect()"
+            },
+            {
+                "name": "disconnect",
+                "description": "Close the SSH connection to the VM.",
+                "usage": "ssh_client.disconnect()"
+            },
+            {
+                "name": "execute_command",
+                "description": "Execute a command on the VM.",
+                "usage": "stdout, stderr, exit_status = ssh_client.execute_command(command, dry_run=False)"
+            }
+        ]
     }
 ]

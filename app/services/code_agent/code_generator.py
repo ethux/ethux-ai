@@ -111,7 +111,7 @@ async def generate_code(messages: List[Message], relevant_modules: List[Dict[str
     try:
         response = await get_text_from_llm(
             messages=code_messages,
-            model="mistral-small-latest",
+            model="openai/o3-mini",
             temperature=temperature
         )
         
