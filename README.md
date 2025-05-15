@@ -9,7 +9,7 @@ ETHUX-AI tries to transforms how Large Language Models (LLMs) interact by embedd
 
 While LLMs using Python as a native execution environment isn't new (as seen in code interpreters), ETHUX-AI's innovation lies in enabling LLMs to compose complex workflows using pre-defined functions tailored for LLMs and the broader Python ecosystem. This approach allows LLMs to create sophisticated solutions with error handling, state management, and multi-agent architectures.
 
-This idea was inspired by: [Huggingface Blog Beating GAIA](https://huggingface.co/blog/beating-gaia)
+This project is inspired by: [Huggingface Blog Beating GAIA](https://huggingface.co/blog/beating-gaia)
 
 ### ETHUX-AI enables LLMs to:
 
