@@ -6,17 +6,22 @@
 
 ## Introduction
 
-ETHUX-AI aims to improve the way LLMs interact with tools and create workflows, by allowing them to write their actions and workflows in Python.
+ETHUX-AI aims to improve the way LLMs interact with tools and create workflows, by retrieving context relevant modules using RAG and allowing them to write their actions and workflows in Python.
 
-By encapsulating multiple functionalities within Python pip-packages or modules, ETHUX-AI enables LLMs to perform tasks using a more natural and expressive approach.
+By packaging multiple functionalities within Python pip-packages or modules, ETHUX-AI enables LLMs to perform tasks using code instead of tool calls.
 
-In this README, we'll provide a more grounded and humble explanation of ETHUX-AI and its capabilities.
+While using RAG to retrieve the right pacakges without to much context regarding available functions.
+
+In this README, we'll provide an explanation of ETHUX-AI and its capabilities.
+
+This project is inspired by: [Huggingface Blog Beating GAIA](https://huggingface.co/blog/beating-gaia)
+
 
 ## How It Works
 
-Each Python module in the `modules` directory encapsulates specific functionalities that LLMs can use to perform tasks. The system:
+Each Python module in the `modules` directory has its own specific functionalities that LLMs can use to perform tasks. The system is as follows:
 
-1. Retrieves relevant modules based on conversation context
+1. Retrieves relevant modules based on conversation context using RAG
 2. Allows the LLM to select appropriate functions
 3. Enables the LLM to write and execute Python workflows
 
@@ -63,22 +68,17 @@ def workflow():
         return None
 ```
 
-5. This workflow should be dry-runned and linted to ensure it is correct, and can be executed without any issues.
-6. Based on the execution result a retry is possible or inform the user the process has failed.
+4. This workflow could be dry-runned and linted to ensure it is correct, and can be executed without any issues.
+5. Based on the execution result a retry is possible or inform the user the process has failed.
 
 As you can see, this enables the LLM to write its own process within code, instead of pre-defining functions and flows.
-See each module as n8n modules, but then in code, with the possebility for the LLM to wr
 
 ### ETHUX-AI enables LLMs to:
 
 ✔ Build multi-step workflows with error handling
-
 ✔ Maintain state across executions within a continuous process
-
 ✔ Nest agents in hierarchical structures for complex problem-solving
-
 ✔ Combine pre-built packages with custom logic for optimal solutions
-
 ✔ Reduce LLM inference calls through efficient workflow composition
 
 ## Getting Started
