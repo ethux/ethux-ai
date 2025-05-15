@@ -12,6 +12,8 @@ By packaging multiple functionalities within Python pip-packages or modules, ETH
 
 While using RAG to retrieve the right pacakges without to much context regarding available functions.
 
+The code should be exectuted in safe docker enironments to prevent any harm to the host system, while being portable and easy to deploy.
+
 In this README, we'll provide an explanation of ETHUX-AI and its capabilities.
 
 This project is inspired by: [Huggingface Blog Beating GAIA](https://huggingface.co/blog/beating-gaia)
@@ -76,9 +78,13 @@ As you can see, this enables the LLM to write its own process within code, inste
 ### ETHUX-AI enables LLMs to:
 
 ✔ Build multi-step workflows with error handling
+
 ✔ Maintain state across executions within a continuous process
+
 ✔ Nest agents in hierarchical structures for complex problem-solving
+
 ✔ Combine pre-built packages with custom logic for optimal solutions
+
 ✔ Reduce LLM inference calls through efficient workflow composition
 
 ## Getting Started
